@@ -1,5 +1,4 @@
 
-
 from selenium import webdriver
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.ui import Select
@@ -20,3 +19,8 @@ driver = WebDriver('/home/hor/ChromeDriver/chromedriver')
 
 def test_22 ():
     driver.get('https://habr.com/ru/post/273897/')
+    time.sleep(10)
+    btn = driver.find_element(By.CSS_SELECTOR, "span.post__title-text")
+
+
+    driver.quit()
