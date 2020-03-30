@@ -1,4 +1,5 @@
 {
   "test_stepik_1.py": true, 
-  "test_stepik_1.py::test_5": true
+  "test_stepik_1.py::test_5": true, 
+  "test_stepik_2.py": true
 }
