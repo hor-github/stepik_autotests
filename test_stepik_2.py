@@ -13,3 +13,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 # driver = WebDriver(executable_path='C://selenium//chromedriver.exe')
 driver = WebDriver('/home/hor/ChromeDriver/chromedriver')
 
+
+def test_1():
+    
