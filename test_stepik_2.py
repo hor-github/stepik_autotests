@@ -14,5 +14,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 driver = WebDriver('/home/hor/ChromeDriver/chromedriver')
 
 
+
+
+
+
+
+12
 def test_1():
-    
