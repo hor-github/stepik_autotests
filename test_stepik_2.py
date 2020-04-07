@@ -31,3 +31,29 @@ def test_1():
     finally:
         time.sleep(30)
         driver.quit()
+
+# 2.1 get_attribute
+def test_2():
+    try:
+        def calc(x):
+            return str(math.log(abs(12 * math.sin(int(x)))))
+
+        driver.get("http://suninjuly.github.io/get_attribute.html")
+        # находим элемент
+        x = driver.find_element(By.CSS_SELECTOR, ".nowrap ~ img ")
+        # получаем значение атрибута valuex
+        art = x.get_attribute("valuex")
+        # подставляем в формулу значение атрибута valuex
+        y = calc(art)
+        input1 = driver.find_element(By.CSS_SELECTOR, ".form-group #answer").send_keys(y)
+        checkbox = driver.find_element(By.CSS_SELECTOR, "#robotCheckbox").click()
+        radiobutton = driver.find_element(By.CSS_SELECTOR, "#robotsRule").click()
+        button = driver.find_element(By.CSS_SELECTOR, ".btn").click()
+    finally:
+        time.sleep(10)
+        driver.quit()
+
+
+# 2.2 Работа со списками
+def test_3():
+    
