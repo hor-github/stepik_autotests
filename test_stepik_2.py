@@ -9,6 +9,7 @@ import os
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+# import pyperclip
 
 # driver = WebDriver(executable_path='C://selenium//chromedriver.exe')
 driver = WebDriver('/home/hor/ChromeDriver/chromedriver')
@@ -123,3 +124,32 @@ def test_5():
         time.sleep(10)
         driver.quit()
 
+
+# 2.3 Работа с окнами
+def test_accept_alert ():
+    try:
+        driver.get("http://suninjuly.github.io/alert_accept.html")
+        driver.find_element(By.CSS_SELECTOR, ".container>.btn").click()
+        # переключаемся на модальное окно и соглашаемся
+        cnf = driver.switch_to.alert.accept()
+
+        # решаем капчу
+        def calc(x):
+            return str(math.log(abs(12 * math.sin(int(x)))))
+        x = driver.find_element(By.CSS_SELECTOR, "#input_value").text
+        y = calc(x)
+        driver.find_element(By.CSS_SELECTOR, "#answer").send_keys(y)
+        btn = driver.find_element(By.CSS_SELECTOR, ".btn").click()
+
+        # помещаем всплывшее число в буфер обмена
+        # переключаемся на всплывшее окно
+        # alert = driver.switch_to.alert
+        # получаем весь текст всплывшего окна
+        # alert_text = alert.text
+        # парсим и преобразуем нужное нам число
+        # addToClipBoard = alert_text.split(': ')[-1]
+        # копируем нужное число в буфер обмена
+        # pyperclip.copy(addToClipBoard)
+    finally:
+        time.sleep(10)
+        driver.quit()
