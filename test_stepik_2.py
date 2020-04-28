@@ -2,14 +2,14 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
 import time
 
 import math
 import os
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-# import pyperclip
+import pyperclip
 
 # driver = WebDriver(executable_path='C://selenium//chromedriver.exe')
 driver = WebDriver('/home/hor/ChromeDriver/chromedriver')
@@ -143,13 +143,82 @@ def test_accept_alert ():
 
         # помещаем всплывшее число в буфер обмена
         # переключаемся на всплывшее окно
-        # alert = driver.switch_to.alert
+        alert = driver.switch_to.alert
         # получаем весь текст всплывшего окна
-        # alert_text = alert.text
+        alert_text = alert.text
         # парсим и преобразуем нужное нам число
-        # addToClipBoard = alert_text.split(': ')[-1]
+        addToClipBoard = alert_text.split(': ')[-1]
         # копируем нужное число в буфер обмена
-        # pyperclip.copy(addToClipBoard)
+        pyperclip.copy(addToClipBoard)
     finally:
         time.sleep(10)
         driver.quit()
+
+
+# 2.3 Работа с окнами - переход на новую вкладку
+def test_6 ():
+    try:
+        driver.get("http://suninjuly.github.io/redirect_accept.html")
+        driver.find_element(By.CSS_SELECTOR, ".container .btn").click()
+
+        # ищем вновь открытую вкладку и переходим на нее
+        new_window = driver.window_handles[1]
+        driver.switch_to.window(new_window)
+
+        # решаем капчу
+        def calc(x):
+            return str(math.log(abs(12 * math.sin(int(x)))))
+
+        x = driver.find_element(By.CSS_SELECTOR, "#input_value").text
+        y = calc(x)
+        driver.find_element(By.CSS_SELECTOR, "#answer").send_keys(y)
+        btn = driver.find_element(By.CSS_SELECTOR, ".btn").click()
+
+        # помещаем всплывшее число в буфер обмена
+        # переключаемся на всплывшее окно
+        alert = driver.switch_to.alert
+        # получаем весь текст всплывшего окна
+        alert_text = alert.text
+        # парсим и преобразуем нужное нам число
+        addToClipBoard = alert_text.split(': ')[-1]
+        # копируем нужное число в буфер обмена
+        pyperclip.copy(addToClipBoard)
+
+    finally:
+        time.sleep(10)
+        driver.quit()
+
+
+# 2.4 Настройка ожиданий
+def test_7 ():
+    try:
+        driver.get("http://suninjuly.github.io/explicit_wait2.html")
+        # ожидаем 15 секунд значение 100 баксов
+        price = WebDriverWait(driver, 15).until(
+            EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".card-title~#price"), "$100")
+        )
+        driver.find_element(By.CSS_SELECTOR, "#book").click()
+
+        # решаем капчу
+        def calc(x):
+            return str(math.log(abs(12 * math.sin(int(x)))))
+
+        x = driver.find_element(By.CSS_SELECTOR, "#input_value").text
+        y = calc(x)
+        driver.find_element(By.CSS_SELECTOR, "#answer").send_keys(y)
+        btn = driver.find_element(By.CSS_SELECTOR, ".form-group~.btn").click()
+
+        # помещаем всплывшее число в буфер обмена
+        # переключаемся на всплывшее окно
+        alert = driver.switch_to.alert
+        # получаем весь текст всплывшего окна
+        alert_text = alert.text
+        # парсим и преобразуем нужное нам число
+        addToClipBoard = alert_text.split(': ')[-1]
+        # копируем нужное число в буфер обмена
+        pyperclip.copy(addToClipBoard)
+
+    finally:
+        time.sleep(10)
+        driver.quit()
+
