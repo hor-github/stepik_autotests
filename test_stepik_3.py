@@ -33,3 +33,4 @@ if __name__ == "__main__":
     unittest.main()
 
 
+"""3.5 PyTest - маркировка"""
