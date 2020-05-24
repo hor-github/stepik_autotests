@@ -19,17 +19,29 @@ def browser():
         browser = WebDriver('/home/hor/ChromeDriver/chromedriver')
     # Авторизация
         browser.get(link)
-        browser.find_element(By.CSS_SELECTOR, ".controls-InputBase__field .controls-InputBase__nativeField_theme_default_caretFilled").send_keys("Балаган")
-        browser.find_element(By.CSS_SELECTOR, ".controls-Render__wrapper input[autocomplete="current-password"]").send_keys("Балаган123")
+        browser.find_element(By.CSS_SELECTOR, ".controls-InputBase__field_theme_default_margin input").send_keys("Балаган")
+        browser.find_element(By.CSS_SELECTOR, "input[name='password']").send_keys("Балаган123")
         browser.find_element(By.CSS_SELECTOR, ".auth-Form__submit").click()
-        time.sleep(10)
+        time.sleep(5)
+        # переход на главную Бизнес
+        # Кликаем 2 раза по Бизнесу
+        WebDriverWait(browser, 15).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, ".NavigationPanels-Accordion__container a:nth-child(3)"))
+        ).click()
+
+        WebDriverWait(browser, 15).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".NavigationPanels-SubMenu__lvl-1  .acc-menu-prevent-default:nth-child(2)"))
+        ).click()
+        time.sleep(5)
+
     finally:
         yield browser
         browser.quit()
 
 
-def test_1(browser):
+def test_operation_filter(browser):
+    # Кликаем 2 раза по Бизнесу
     WebDriverWait(browser, 15).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, ".NavigationPanels-Accordion__container a:nth-child(3)"))
-        )
-    browser.find_element(By.CSS_SELECTOR, ".NavigationPanels-Accordion__container a:nth-child(3)").clik()
+        ).click()
