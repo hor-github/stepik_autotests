@@ -18,16 +18,6 @@ import pyperclip
 # driver = WebDriver('/home/hor/ChromeDriver/chromedriver')
 
 
-@pytest.fixture(scope="function")
-def driver():
-    print("\nstart browser for test..")
-    driver = WebDriver('/home/hor/ChromeDriver/chromedriver')
-    # этот код выполняется после каждого теста
-    yield driver
-    print("\nquit browser..")
-    driver.quit()
-
-
 # в качестве параметров устанавливам части URL
 @pytest.mark.parametrize('param', ["236895", "236896", "236897", "236898", "236899", "236903", "236904", "236905"])
 def test_1(driver, param):
